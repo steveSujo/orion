@@ -1,6 +1,6 @@
 #![cfg(test)]
-use vdb::database::{Database, VectorDatabase, DatabaseError};
-use vdb::types::{Vector, quantize_sq8, dequantize_sq8, l2_distance};
+use orion::database::{Database, VectorDatabase, DatabaseError};
+use orion::types::{Vector, quantize_sq8, dequantize_sq8, l2_distance};
 use tempfile::tempdir;
 use std::sync::{Arc, RwLock};
 use std::thread;

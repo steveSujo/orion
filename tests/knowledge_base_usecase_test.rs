@@ -1,6 +1,6 @@
 #![cfg(test)]
-use vdb::database::{Database, VectorDatabase};
-use vdb::types::Vector;
+use orion::database::{Database, VectorDatabase};
+use orion::types::Vector;
 use tempfile::tempdir;
 use std::sync::{Arc, RwLock};
 use std::thread;

@@ -1,6 +1,6 @@
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
-use vdb::database::{Database, VectorDatabase};
-use vdb::types::{Vector, quantize_sq8, dequantize_sq8};
+use orion::database::{Database, VectorDatabase};
+use orion::types::{Vector, quantize_sq8, dequantize_sq8};
 use tempfile::tempdir;
 
 fn bench_vector_operations(c: &mut Criterion) {

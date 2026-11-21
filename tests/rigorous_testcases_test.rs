@@ -1,7 +1,7 @@
 #![cfg(test)]
-use vdb::database::{Database, VectorDatabase, DatabaseError};
-use vdb::types::{Vector, DistanceMetric, l2_distance, cosine_similarity, dot_product, quantize_sq8, quantized_l2_distance};
-use vdb::error::VdbError;
+use orion::database::{Database, VectorDatabase, DatabaseError};
+use orion::types::{Vector, DistanceMetric, l2_distance, cosine_similarity, dot_product, quantize_sq8, quantized_l2_distance};
+use orion::error::VdbError;
 use tempfile::tempdir;
 
 #[test]
