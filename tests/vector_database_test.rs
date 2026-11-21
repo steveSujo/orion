@@ -160,3 +160,17 @@ fn test_sq8_quantization_roundtrip() {
     
     assert!(mse < 0.01, "MSE {mse} exceeded threshold");
 }
+
+#[test]
+fn test_search_with_filter_predicate() {
+    let dir = tempfile::tempdir().unwrap();
+    let db_path = dir.path().join("filtered_search.vdb");
+    let mut db = VectorDatabase::open(&db_path, None).unwrap();
+    db.insert(1, Vector { data: vec![0.0, 0.0, 0.0, 0.0] }).unwrap();
+    db.insert(2, Vector { data: vec![0.1, 0.0, 0.0, 0.0] }).unwrap();
+    db.insert(3, Vector { data: vec![0.2, 0.0, 0.0, 0.0] }).unwrap();
+
+    let even_only = db.search_with_filter(&[0.0, 0.0, 0.0, 0.0], 2, |id| id % 2 == 0).unwrap();
+    assert_eq!(even_only.len(), 1);
+    assert_eq!(even_only[0].0, 2);
+}

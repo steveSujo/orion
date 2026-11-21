@@ -232,6 +232,19 @@ impl HnswGraph {
     }
 
     pub fn search(&self, query: &[f32], k: usize, metric: DistanceMetric) -> Result<Vec<(u64, f32)>, VdbError> {
+        self.search_with_filter(query, k, metric, |_| true)
+    }
+
+    pub fn search_with_filter<F>(
+        &self,
+        query: &[f32],
+        k: usize,
+        metric: DistanceMetric,
+        predicate: F,
+    ) -> Result<Vec<(u64, f32)>, VdbError>
+    where
+        F: Fn(u64) -> bool,
+    {
         let ep = match self.entry_point {
             Some(ep) => ep,
             None => return Ok(Vec::new()),
@@ -264,8 +277,14 @@ impl HnswGraph {
             current_level -= 1;
         }
 
-        let w = self.search_layer(query, &[curr_obj], std::cmp::max(k, self.config.ef_search), 0, metric)?;
-        let mut results: Vec<(u64, f32)> = w.into_iter().take(k).map(|c| (c.id, c.distance)).collect();
+        let ef = std::cmp::max(k.saturating_mul(4), self.config.ef_search);
+        let w = self.search_layer(query, &[curr_obj], ef, 0, metric)?;
+        let mut results: Vec<(u64, f32)> = w
+            .into_iter()
+            .filter(|c| predicate(c.id))
+            .take(k)
+            .map(|c| (c.id, c.distance))
+            .collect();
         results.sort_by(|a, b| a.1.total_cmp(&b.1).then_with(|| a.0.cmp(&b.0)));
         Ok(results)
     }

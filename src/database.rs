@@ -245,6 +245,13 @@ impl VectorDatabase {
     pub fn search(&self, query: &[f32], k: usize) -> Result<Vec<(u64, f32)>, VdbError> {
         self.graph.search(query, k, self.metric)
     }
+
+    pub fn search_with_filter<F>(&self, query: &[f32], k: usize, predicate: F) -> Result<Vec<(u64, f32)>, VdbError>
+    where
+        F: Fn(u64) -> bool,
+    {
+        self.graph.search_with_filter(query, k, self.metric, predicate)
+    }
 }
 
 impl Database for VectorDatabase {
