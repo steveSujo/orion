@@ -1,6 +1,5 @@
  # VDB — Embedded Vector Database in Rust 
 
-[![Crates.io](https://img.shields.io/crates/v/vdb.svg)](https://crates.io/crates/vdb)
 [![License: MIT OR Apache-2.0](https://img.shields.io/badge/license-MIT%20APACHE-blue.svg)](LICENSE)
 [![Tests](https://github.com/steveSujo/vectordb-rs/actions/workflows/test.yml/badge.svg)](https://github.com/steveSujo/vectordb-rs/actions/workflows/test.yml)
 	
