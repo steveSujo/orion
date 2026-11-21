@@ -1,7 +1,7 @@
 # Orion: Embedded Vector Database in Rust
 
 [![License: MIT OR Apache-2.0](https://img.shields.io/badge/license-MIT%20APACHE-blue.svg)](LICENSE)
-[![Tests](https://github.com/steveSujo/vectordb-rs/actions/workflows/test.yml/badge.svg)](https://github.com/steveSujo/vectordb-rs/actions/workflows/test.yml)
+[![Tests](https://github.com/steveSujo/orion/actions/workflows/test.yml/badge.svg)](https://github.com/steveSujo/orion/actions/workflows/test.yml)
 
 Tools like SQLite inspire me to build small, low-overhead storage engines that run directly inside an application instead of behind a separate server process. `orion` is a single-file embedded vector database written in pure Rust, so you get HNSW approximate nearest neighbor search, SQ8 scalar quantization, predicate filtering, and optional AES-256-GCM encryption in one `.vdb` file.
 
@@ -71,7 +71,7 @@ Add `orion` to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-orion = { git = "https://github.com/steveSujo/vectordb-rs.git", branch = "main" }
+orion = { git = "https://github.com/steveSujo/orion.git", branch = "main" }
 ```
 
 ## Quick Start
